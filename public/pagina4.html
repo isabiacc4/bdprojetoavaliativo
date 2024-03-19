@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Consultar Vendas</title>
+  </head>
+  <body>
+    <h1>Consultar Venda</h1>
+    <label for="saleId">ID da Venda:</label>
+    <input type="text" id="saleId" />
+    <button onclick="consultarVenda()">Consultar Venda</button>
+    <div id="resultado">
+      <!-- Resultado da consulta será exibido aqui -->
+    </div>
+    <script>
+      async function consultarVenda() {
+        // Obtém o valor do campo e remove espaços em branco do início e do fim
+        const saleId = document.getElementById("saleId").value.trim();
+        if (saleId === "") {
+          alert("Favor inserir ID no campo para consulta");
+          document.getElementById("saleId").focus(); // Dá foco de volta ao campo de entrada
+        } else {
+          try {
+            const response = `await fetch(/vendas/${saleId})`; // Faz uma requisição para a rota "/vendas/:id" no servidor
+            if (response.status === 404) {
+              document.getElementById("resultado").innerHTML =
+                "<p>Venda não encontrada</p>";
+            } else {
+              const data = await response.json(); // Converte a resposta para JSON
+              document.getElementById("resultado").innerHTML = `
+                <h2>Detalhes da Venda</h2>
+                <form>
+                  <label for="saleIdField">ID da Venda:</label>
+                  <input type="text" id="saleIdField" value="${data.venda_id}" disabled><br>
+                  
+                  <label for="date">ID do Cliente:</label>
+                  <input type="text" id="client" value="${data.cliente_id}" disabled><br>
+                  
+                  <label for="item">ID do Vendedor:</label>
+                  <input type="text" id="client" value="${data.vendedor_id}" disabled><br>
+                  
+                  <label for="item">Valor:</label>
+                  <input type="text" id="date" value="${data.valor}" disabled><br>
+                  
+                  <label for="client">Data da venda:</label>
+                  <input type="text" id="item" value="${data.data_venda}" disabled><br>
+                  
+                  <label for="quantity">Categoria:</label>
+                  <input type="text" id="quantity" value="${data.categoria}" disabled><br>
+                 
+                </form>`;
+            }
+          } catch (error) {
+            console.error("Erro ao consultar venda:", error);
+          }
+        }
+      }
+    </script>
+  </body>
+</html>
