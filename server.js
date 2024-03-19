@@ -10,16 +10,16 @@ const port = 3000;
 
 // Configurações de conexão com o banco de dados
 const config = {
-  server: "", // Nome do servidor
+  server: "localhost", // Nome do servidor
   authentication: {
     type: "default", // Tipo de autenticação
     options: {
-      userName: "", // Nome de usuário
-      password: "", // Senha
+      userName: "sa", // Nome de usuário
+      password: "nescautoddy08", // Senha
     },
   },
   options: {
-    database: "", // Nome do banco de dados
+    database: "VENDASX", // Nome do banco de dados
     trustServerCertificate: true, // Indica se deve confiar no certificado do servidor
   },
 };
