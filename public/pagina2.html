@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Página de consulta do cliente</title>
+  </head>
+  <body>
+    <h1>Consulta - Clientes</h1>
+    <label for="clientId">ID Cliente:</label>
+    <input type="text" id="clientId" />
+    <button onclick="consultarCliente()">Consultar Venda</button>
+    <div id="resultado">
+      <!-- Resultado da consulta será exibido aqui -->
+    </div>
+    <script>
+      async function consultarCliente() {
+        // Obtém o valor do campo e remove espaços em branco do início e do fim
+        const clientId = document.getElementById("clientId").value.trim();
+        if (clientId === "") {
+          alert("Favor inserir ID no campo para consulta");
+          document.getElementById("clientId").focus(); // Dá foco de volta ao campo de entrada
+        } else {
+          try {
+            const response = await fetch(`/vendas/${clientId}`); // Faz uma requisição para a rota "/vendas/:id" no servidor
+            if (response.status === 404) {
+              document.getElementById("resultado").innerHTML =
+                "<p>Cliente não registrado, verifique  o ID.</p>";
+            } else {
+              const data = await response.json(); // Converte a resposta para JSON
+              document.getElementById("resultado").innerHTML = `
+                <h2>Detalhes do Cliente</h2>
+                <form>
+                  <label for="clientIdField">ID do Cliente:</label>
+                  <input type="text" id="clientIdField" value="${data.cliente_id}" disabled><br>
+
+                  <label for="name">Nome do cliente:</label>
+                  <input type="text" id="name" value="${data.nome}" disabled><br>
+
+                  <label for="age">Idade: </label>
+                  <input type="text" id="age" value="${data.idade}" disabled><br>
+
+                  <label for="sexo">Sexo: </label>
+                  <input type="text" id="sexo" value="${data.sexo}" disabled><br>
+
+                  <label for="cidade">Cidade: </label>
+                  <input type="text" id="cidade" value="${data.cidade}" disabled><br>
+
+                </form>`;
+            }
+          } catch (error) {
+            console.error("Erro ao consultar cliente:", error);
+          }
+        }
+      }
+    </script>
+  </body>
+</html>
