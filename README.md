@@ -1,3 +1,3 @@
 # bdprojetoavaliativo
 
-projeto davaliativo sobre banco de dados
+projeto avaliativo sobre banco de dados
