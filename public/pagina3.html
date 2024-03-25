@@ -22,7 +22,7 @@
           document.getElementById("vendedor_id").focus(); // Dá foco de volta ao campo de entrada
         } else {
           try {
-            const response = await fetch(`/vendedores/${vendedor_id}`); // Faz uma requisição para a rota "/vendas/:id" no servidor
+            const response = await fetch(`/vendedores/${vendedor_id}`); // Faz uma requisição para a rota "/vendedores/:id" no servidor
             if (response.status === 404) {
               document.getElementById("resultado").innerHTML =
                 "<p>Vendedor não encontrado</p>";
@@ -49,5 +49,8 @@
       }
 
       </script>
+
+<button type="submit"><a href="/">Voltar</a></button>
+
     </body>
       </html>

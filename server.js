@@ -78,16 +78,16 @@ app.get("/", (req, res) => {
 
 
 //rota para linkar
-app.get("/vendedores", async (req, res) => {
-  try {
-    const query = "SELECT * FROM vendedores;"; // Consulta SQL para selecionar todas as vendas
-    const sales = await executeQuery(query); // Executa a consulta SQL e aguarda os resultados
-    res.sendFile(__dirname + "/public/pagina3.html"); // Retorna as vendas em formato JSON
-  } catch (err) {
-    console.error(err.message);
-    res.status(500).send(err.message);
-  }
-});
+// app.get("/vendedores", async (req, res) => {
+//   try {
+//     const query = "SELECT * FROM vendedores;"; // Consulta SQL para selecionar todas as vendas
+//     const sales = await executeQuery(query); // Executa a consulta SQL e aguarda os resultados
+//     res.sendFile(__dirname + "/public/pagina3.html"); // Retorna as vendas em formato JSON
+//   } catch (err) {
+//     console.error(err.message);
+//     res.status(500).send(err.message);
+//   }
+// });
 
 // Rota para obter os produtos em formato JSON
 app.get("/vendedores/:id", async (req, res) => {
