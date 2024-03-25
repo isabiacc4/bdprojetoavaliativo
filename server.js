@@ -108,7 +108,7 @@ app.get("/vendedores/:id", async (req, res) => {
 
 
 //rota para linkar
-app.get("/cliente", async (req, res) => {
+app.get("/clientes", async (req, res) => {
   try {
     const query = "SELECT * FROM clientes;"; // Consulta SQL para selecionar todas as vendas
     const sales = await executeQuery(query); // Executa a consulta SQL e aguarda os resultados
@@ -120,7 +120,7 @@ app.get("/cliente", async (req, res) => {
 });
 
 // Rota para obter uma venda pelo ID em formato JSON
-app.get("/cliente/:id", async (req, res) => {
+app.get("/clientes/:id", async (req, res) => {
   try {
     const id = req.params.id; // Obtém o ID da venda da URL
     const query = `SELECT * FROM clientes WHERE cliente_id = ${id};`; // Consulta SQL para selecionar a venda pelo ID
