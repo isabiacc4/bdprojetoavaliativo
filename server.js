@@ -26,11 +26,11 @@ const config = {
     type: "default", // Tipo de autenticação
     options: {
       userName: "sa", // Nome de usuário
-      password: "nescautoddy08", // Senha
+      password: "13a5Ad89", // Senha
     },
   },
   options: {
-    database: "VENDASX", // Nome do banco de dados
+    database: "bd_vendax", // Nome do banco de dados
     trustServerCertificate: true, // Indica se deve confiar no certificado do servidor
   },
 };
