@@ -5,6 +5,17 @@ const { Connection, Request } = require("tedious");
 
 // Cria uma instância do aplicativo express
 const app = express();
+
+//importa o modulo path para lidar com caminhos de arquivo
+const path = require("path");
+
+//configurações do middleware para fazer o parsing do corpo da requisição JSON
+app.use(express.json())
+
+//configuração para servir arquivos estáticos na pasta "public"
+app.use(express.static(path.join(__dirname, "public")));
+
+
 // Define a porta em que o servidor irá escutar
 const port = 3000;
 
@@ -77,17 +88,6 @@ app.get("/", (req, res) => {
 });
 
 
-//rota para linkar
-// app.get("/vendedores", async (req, res) => {
-//   try {
-//     const query = "SELECT * FROM vendedores;"; // Consulta SQL para selecionar todas as vendas
-//     const sales = await executeQuery(query); // Executa a consulta SQL e aguarda os resultados
-//     res.sendFile(__dirname + "/public/pagina3.html"); // Retorna as vendas em formato JSON
-//   } catch (err) {
-//     console.error(err.message);
-//     res.status(500).send(err.message);
-//   }
-// });
 
 // Rota para obter os produtos em formato JSON
 app.get("/vendedores/:id", async (req, res) => {
@@ -107,17 +107,6 @@ app.get("/vendedores/:id", async (req, res) => {
 });
 
 
-//rota para linkar
-app.get("/clientes", async (req, res) => {
-  try {
-    const query = "SELECT * FROM clientes;"; // Consulta SQL para selecionar todas as vendas
-    const sales = await executeQuery(query); // Executa a consulta SQL e aguarda os resultados
-    res.sendFile(__dirname + "/public/pagina2.html"); // Retorna as vendas em formato JSON
-  } catch (err) {
-    console.error(err.message);
-    res.status(500).send(err.message);
-  }
-});
 
 // Rota para obter uma venda pelo ID em formato JSON
 app.get("/clientes/:id", async (req, res) => {
@@ -137,17 +126,7 @@ app.get("/clientes/:id", async (req, res) => {
 });
 
 
-//rota para linkar
-app.get("/vendas", async (req, res) => {
-  try {
-    const query = "SELECT * FROM vendas;"; // Consulta SQL para selecionar todas as vendas
-    const sales = await executeQuery(query); // Executa a consulta SQL e aguarda os resultados
-    res.sendFile(__dirname + "/public/pagina4.html"); // Retorna as vendas em formato JSON
-  } catch (err) {
-    console.error(err.message);
-    res.status(500).send(err.message);
-  }
-});
+
 
 // Rota para obter uma venda pelo ID em formato JSON
 app.get("/vendas/:id", async (req, res) => {
@@ -165,6 +144,27 @@ app.get("/vendas/:id", async (req, res) => {
     res.status(500).send(err.message);
   }
 });
+
+
+
+// Rota para obter os produtos em formato JSON
+app.get("/visao/:id", async (req, res) => {
+  try {
+    const id = req.params.id; // Obtém o ID da venda da URL
+    const query = `SELECT * FROM visao_vendas WHERE id = ${id};`; // Consulta SQL para selecionar a venda pelo ID
+    const seller = await executeQuery(query); // Executa a consulta SQL e aguarda os resultados
+    if (seller.length === 0) {
+      res.status(404).send("Visão não encontrado");
+    } else {
+      res.json(seller[0]); // Retorna a venda em formato JSON (supondo que apenas uma venda corresponda ao ID)
+    }
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send(err.message);
+  }
+});
+
+
 
 // Inicia o servidor na porta especificada
 app.listen(port, () => {

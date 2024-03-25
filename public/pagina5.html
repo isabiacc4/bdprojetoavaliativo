@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Página de visão geral</title>
+  </head>
+  <body>
+    <h1>Consulta Integrada</h1>
+    <label for="idVisao">ID: </label>
+    <input type="text" id="idVisao" />
+    <button onclick="consultarVisao()">Consultar Visão</button>
+    <div id="resultado">
+      <!-- Resultado da consulta será exibido aqui -->
+    </div>
+<br>
+    <script>
+
+      async function consultarVisao() {
+        // Obtém o valor do campo e remove espaços em branco do início e do fim
+        const idVisao = document.getElementById("idVisao").value.trim();
+        if (idVisao === "") {
+          alert("Favor inserir ID no campo para consulta");
+          document.getElementById("idVisao").focus(); // Dá foco de volta ao campo de entrada
+        } else {
+          try {
+            const response = await fetch(`/visao/${idVisao}`); // Faz uma requisição para a rota "/vendas/:id" no servidor
+            if (response.status === 404) {
+              document.getElementById("resultado").innerHTML =
+                "<p>ID não registrado, verifique  o ID.</p>";
+            } else {
+              const data = await response.json(); // Converte a resposta para JSON
+              document.getElementById("resultado").innerHTML = `
+                <h2>Detalhes da Consulta Integrada</h2>
+                <form>
+                  <label for="IdField">ID: </label>
+                  <input type="text" id="IdField" value="${data.id}" disabled><br>
+
+                  <label for="namec">Nome do cliente: </label>
+                  <input type="text" id="namec" value="${data.cnome}" disabled><br>
+
+                  <label for="namevend">Nome do vendedor: </label>
+                  <input type="text" id="namevend" value="${data.vendnome}" disabled><br>
+
+                  <label for="regiao">Região do vendedor: </label>
+                  <input type="text" id="regiao" value="${data.regiao}" disabled><br>
+
+                  <label for="data">Data da venda: </label>
+                  <input type="text" id="data" value="${data.data_venda}" disabled><br>
+
+                  <label for="valor">Valor da venda: </label>
+                  <input type="text" id="valor" value="${data.valor}" disabled><br>
+
+
+                </form>`;
+            }
+          } catch (error) {
+            console.error("Erro na colsulta integrada:", error);
+          }
+        }
+      }
+    </script>
+
+<button type="submit"><a href="/">Voltar</a></button>
+
+  </body>
+</html>
