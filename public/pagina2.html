@@ -25,7 +25,7 @@
           document.getElementById("clientId").focus(); // Dá foco de volta ao campo de entrada
         } else {
           try {
-            const response = await fetch(`/vendas/${clientId}`); // Faz uma requisição para a rota "/vendas/:id" no servidor
+            const response = await fetch(`/clientes/${clientId}`); // Faz uma requisição para a rota "/vendas/:id" no servidor
             if (response.status === 404) {
               document.getElementById("resultado").innerHTML =
                 "<p>Cliente não registrado, verifique  o ID.</p>";
@@ -58,7 +58,7 @@
       }
     </script>
 
-<button type="submit"><a href="/">Voltar</a></button>'
+<button type="submit"><a href="/">Voltar</a></button>
 
   </body>
 </html>

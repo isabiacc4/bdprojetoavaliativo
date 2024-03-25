@@ -15,11 +15,11 @@ const config = {
     type: "default", // Tipo de autenticação
     options: {
       userName: "sa", // Nome de usuário
-      password: "nescautoddy08", // Senha
+      password: "13a5Ad89", // Senha
     },
   },
   options: {
-    database: "VENDASX", // Nome do banco de dados
+    database: "bd_vendax", // Nome do banco de dados
     trustServerCertificate: true, // Indica se deve confiar no certificado do servidor
   },
 };
@@ -76,18 +76,43 @@ app.get("/", (req, res) => {
   res.sendFile(__dirname + "/public/index.html"); // Envia o arquivo HTML da página inicial
 });
 
+
+//rota para linkar
+app.get("/vendedores", async (req, res) => {
+  try {
+    const query = "SELECT * FROM vendedores;"; // Consulta SQL para selecionar todas as vendas
+    const sales = await executeQuery(query); // Executa a consulta SQL e aguarda os resultados
+    res.sendFile(__dirname + "/public/pagina3.html"); // Retorna as vendas em formato JSON
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send(err.message);
+  }
+});
+
 // Rota para obter os produtos em formato JSON
 app.get("/vendedores/:id", async (req, res) => {
   try {
     const id = req.params.id; // Obtém o ID da venda da URL
     const query = `SELECT * FROM vendedores WHERE vendedor_id = ${id};`; // Consulta SQL para selecionar a venda pelo ID
     const seller = await executeQuery(query); // Executa a consulta SQL e aguarda os resultados
-    res.sendFile(__dirname + "/public/pagina3.html");
     if (seller.length === 0) {
       res.status(404).send("Vendedor(a) não encontrado(a)");
     } else {
       res.json(seller[0]); // Retorna a venda em formato JSON (supondo que apenas uma venda corresponda ao ID)
     }
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send(err.message);
+  }
+});
+
+
+//rota para linkar
+app.get("/cliente", async (req, res) => {
+  try {
+    const query = "SELECT * FROM clientes;"; // Consulta SQL para selecionar todas as vendas
+    const sales = await executeQuery(query); // Executa a consulta SQL e aguarda os resultados
+    res.sendFile(__dirname + "/public/pagina2.html"); // Retorna as vendas em formato JSON
   } catch (err) {
     console.error(err.message);
     res.status(500).send(err.message);
@@ -100,12 +125,24 @@ app.get("/cliente/:id", async (req, res) => {
     const id = req.params.id; // Obtém o ID da venda da URL
     const query = `SELECT * FROM clientes WHERE cliente_id = ${id};`; // Consulta SQL para selecionar a venda pelo ID
     const client = await executeQuery(query); // Executa a consulta SQL e aguarda os resultados
-    res.sendFile(__dirname + "/public/pagina2.html");
     if (client.length === 0) {
       res.status(404).send("Cliente não encontrado(a)");
     } else {
       res.json(client[0]); // Retorna a venda em formato JSON (supondo que apenas uma venda corresponda ao ID)
     }
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send(err.message);
+  }
+});
+
+
+//rota para linkar
+app.get("/vendas", async (req, res) => {
+  try {
+    const query = "SELECT * FROM vendas;"; // Consulta SQL para selecionar todas as vendas
+    const sales = await executeQuery(query); // Executa a consulta SQL e aguarda os resultados
+    res.sendFile(__dirname + "/public/pagina4.html"); // Retorna as vendas em formato JSON
   } catch (err) {
     console.error(err.message);
     res.status(500).send(err.message);
@@ -118,7 +155,6 @@ app.get("/vendas/:id", async (req, res) => {
     const id = req.params.id; // Obtém o ID da venda da URL
     const query = `SELECT * FROM vendas WHERE venda_id = ${id};`; // Consulta SQL para selecionar a venda pelo ID
     const sale = await executeQuery(query); // Executa a consulta SQL e aguarda os resultados
-    res.sendFile(__dirname + "/public/pagina4.html");
     if (sale.length === 0) {
       res.status(404).send("Venda não encontrada");
     } else {

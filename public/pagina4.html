@@ -22,7 +22,7 @@
           document.getElementById("saleId").focus(); // Dá foco de volta ao campo de entrada
         } else {
           try {
-            const response = `await fetch(/vendas/${saleId})`; // Faz uma requisição para a rota "/vendas/:id" no servidor
+            const response = await fetch(`/vendas/${saleId}`); // Faz uma requisição para a rota "/vendas/:id" no servidor
             if (response.status === 404) {
               document.getElementById("resultado").innerHTML =
                 "<p>Venda não encontrada</p>";
@@ -48,7 +48,6 @@
                   
                   <label for="quantity">Categoria:</label>
                   <input type="text" id="quantity" value="${data.categoria}" disabled><br>
-                 
                 </form>`;
             }
           } catch (error) {
