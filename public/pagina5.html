@@ -4,12 +4,22 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Página de visão geral</title>
+    <link rel="stylesheet" type="text/css" href="stylepag5.css" />
   </head>
+
   <body>
     <h1>Consulta Integrada</h1>
-    <label for="idVisao">ID: </label>
-    <input type="text" id="idVisao" />
-    <button onclick="consultarVisao()">Consultar Visão</button>
+    <br>
+    <div class="container">
+      <label for="idVisao" class="label1">Digite o ID para realizar uma consulta completa: </label>
+      <br>
+      <input type="text" id="idVisao" />
+      <br>
+      <br>
+      <button onclick="consultarVisao()">Consultar Visão</button>
+    </div>
+    <br>
+    <br>
     <div id="resultado">
       <!-- Resultado da consulta será exibido aqui -->
     </div>
@@ -31,32 +41,34 @@
             } else {
               const data = await response.json(); // Converte a resposta para JSON
               document.getElementById("resultado").innerHTML = `
+              <div class="container_result">
                 <h2>Detalhes da Consulta Integrada</h2>
                 <form>
-                  <label for="IdField">ID: </label>
-                  <input type="text" id="IdField" value="${data.id}" disabled><br>
+                  <label for="IdField">ID: </label><br>
+                  <input type="text" id="IdField" value="${data.id}" disabled><br><br>
+                  
+                  <label for="namec">Nome do cliente: </label><br>
+                  <input type="text" id="namec" value="${data.cnome}" disabled><br><br>
 
-                  <label for="namec">Nome do cliente: </label>
-                  <input type="text" id="namec" value="${data.cnome}" disabled><br>
+                  <label for="namevend">Nome do vendedor: </label><br>
+                  <input type="text" id="namevend" value="${data.vendnome}" disabled><br><br>
 
-                  <label for="namevend">Nome do vendedor: </label>
-                  <input type="text" id="namevend" value="${data.vendnome}" disabled><br>
+                  <label for="regiao">Região do vendedor: </label><br>
+                  <input type="text" id="regiao" value="${data.regiao}" disabled><br><br>
 
-                  <label for="regiao">Região do vendedor: </label>
-                  <input type="text" id="regiao" value="${data.regiao}" disabled><br>
+                  <label for="idade">idade do cliente: </label><br>
+                  <input type="text" id="idade" value="${data.cliente_idade}" disabled><br><br>
 
-                  <label for="idade">idade do cliente: </label>
-                  <input type="text" id="idade" value="${data.cliente_idade}" disabled><br>
+                  <label for="data">Data da venda: </label><br>
+                  <input type="text" id="data" value="${data.data_venda}" disabled><br><br>
 
-
-                  <label for="data">Data da venda: </label>
-                  <input type="text" id="data" value="${data.data_venda}" disabled><br>
-
-                  <label for="valor">Valor da venda: </label>
-                  <input type="text" id="valor" value="${data.valor}" disabled><br>
+                  <label for="valor">Valor da venda: </label><br>
+                  <input type="text" id="valor" value="${data.valor}" disabled><br><br>
 
 
-                </form>`;
+                </form>
+                <div/>
+                `;
             }
           } catch (error) {
             console.error("Erro na colsulta integrada:", error);
@@ -66,7 +78,7 @@
     </script>
 <br/>
 
-<button type="submit"><a href="/">Voltar</a></button>
+<button type="submit" class="voltar"><a href="/">Voltar</a></button>
 
   </body>
 </html>
