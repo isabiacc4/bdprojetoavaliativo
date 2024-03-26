@@ -4,15 +4,19 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Consultar Vendedores</title>
+    <link rel="stylesheet" type="text/css" href="/pagina3.css">
   </head>
-  <body>
-    <h1>Consultar Vendendedor</h1>
-    <label for="vendedor_id">ID do vendendedor:</label>
+  <body class="body">
+    
+    <h1 class="title">Consultar Vendendedor</h1>
+    <div class="corpo">
+    <label for="vendedor_id">ID do vendendedor:</label></br>
     <input type="text" id="vendedor_id" />
-    <button onclick="consultarVendedor()">Consultar Vendedor</button>
+    <button onclick="consultarVendedor()" class="button">Consultar Vendedor</button>
     <div id="resultado">
       <!-- Resultado da consulta será exibido aqui -->
     </div>
+  </div>
     <script>
       async function consultarVendedor() {
         // Obtém o valor do campo e remove espaços em branco do início e do fim
@@ -50,7 +54,7 @@
 
       </script>
 
-<button type="submit"><a href="/">Voltar</a></button>
+<button type="submit" class="voltar"><a href="/" class="a" >Voltar</a></button>
 
     </body>
       </html>
