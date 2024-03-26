@@ -3,16 +3,28 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="/stylepag4.css">
     <title>Consultar Vendas</title>
   </head>
   <body>
-    <h1>Consultar Venda</h1>
+    <h1 class="title">Consultar Venda</h1>
+    <div class="container">
     <label for="saleId">ID da Venda:</label>
+    <br>
     <input type="text" id="saleId" />
+    <br>
+
+    <div class="botao">
     <button onclick="consultarVenda()">Consultar Venda</button>
+  </div>
+
+    <br>
+    <div class="bloco">
     <div id="resultado">
       <!-- Resultado da consulta será exibido aqui -->
     </div>
+  </div>
+  
     <script>
       async function consultarVenda() {
         // Obtém o valor do campo e remove espaços em branco do início e do fim
@@ -30,25 +42,34 @@
               const data = await response.json(); // Converte a resposta para JSON
               document.getElementById("resultado").innerHTML = `
                 <h2>Detalhes da Venda</h2>
+                
+                
                 <form>
                   <label for="saleIdField">ID da Venda:</label>
                   <input type="text" id="saleIdField" value="${data.venda_id}" disabled><br>
+                  <br>
                   
                   <label for="date">ID do Cliente:</label>
                   <input type="text" id="client" value="${data.cliente_id}" disabled><br>
+                  <br>
                   
                   <label for="item">ID do Vendedor:</label>
                   <input type="text" id="client" value="${data.vendedor_id}" disabled><br>
+                  <br>
                   
                   <label for="item">Valor:</label>
                   <input type="text" id="date" value="${data.valor}" disabled><br>
+                  <br>
                   
                   <label for="client">Data da venda:</label>
                   <input type="text" id="item" value="${data.data_venda}" disabled><br>
+                  <br>
                   
                   <label for="quantity">Categoria:</label>
                   <input type="text" id="quantity" value="${data.categoria}" disabled><br>
+                  <br>
                 </form>`;
+                
             }
           } catch (error) {
             console.error("Erro ao consultar venda:", error);
@@ -59,7 +80,13 @@
     </script>
 <br/>
 
+<br>
+
+<div class="voltar">
 <button type="submit"><a href="/">Voltar</a></button>
+</div>
+
+</div>
 
   </body>
 </html>

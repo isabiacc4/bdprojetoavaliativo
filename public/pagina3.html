@@ -4,15 +4,19 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Consultar Vendedores</title>
+    <link rel="stylesheet" type="text/css" href="/pagina3.css">
   </head>
-  <body>
-    <h1>Consultar Vendendedor</h1>
-    <label for="vendedor_id">ID do vendendedor:</label>
+  <body class="body">
+    
+    <h1 class="title">Consultar Vendendedor</h1>
+    <div class="corpo">
+    <label for="vendedor_id">ID do vendendedor:</label></br>
     <input type="text" id="vendedor_id" />
-    <button onclick="consultarVendedor()">Consultar Vendedor</button>
+    <button onclick="consultarVendedor()" class="button">Consultar Vendedor</button>
     <div id="resultado">
       <!-- Resultado da consulta será exibido aqui -->
     </div>
+  </div>
     <script>
       async function consultarVendedor() {
         // Obtém o valor do campo e remove espaços em branco do início e do fim
@@ -29,8 +33,8 @@
             } else {
               const data = await response.json(); // Converte a resposta para JSON
               document.getElementById("resultado").innerHTML = `
-                <h2>Detalhes do vendedor</h2>
-                <form>
+                <h2 class="title2">Detalhes do vendedor</h2>
+                <form class="corpo2">
                   <label for="vendedor_idField">ID do vendedor:</label>
                   <input type="text" id="vendedor_idField" value="${data.vendedor_id}" disabled><br>
 
@@ -49,8 +53,9 @@
       }
 
       </script>
-<br/>
-<button type="submit"><a href="/">Voltar</a></button>
+
+<button type="submit" class="voltar"><a href="/" class="a" >Voltar</a></button>
+
 
     </body>
       </html>
