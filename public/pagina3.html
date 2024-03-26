@@ -33,8 +33,8 @@
             } else {
               const data = await response.json(); // Converte a resposta para JSON
               document.getElementById("resultado").innerHTML = `
-                <h2>Detalhes do vendedor</h2>
-                <form>
+                <h2 class="title2">Detalhes do vendedor</h2>
+                <form class="corpo2">
                   <label for="vendedor_idField">ID do vendedor:</label>
                   <input type="text" id="vendedor_idField" value="${data.vendedor_id}" disabled><br>
 
