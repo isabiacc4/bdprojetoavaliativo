@@ -4,18 +4,25 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Página de consulta do cliente</title>
+    <link rel="stylesheet" type="text/css" href="stylepag2.css" />
   </head>
   <body>
     <h1>Consulta - Clientes</h1>
-    <label for="clientId">ID Cliente:</label>
-    <input type="text" id="clientId" />
-    <button onclick="consultarCliente()">Consultar Venda</button>
+    <br />
+    <section class="container">
+      <label for="clientId">Digite o ID do Cliente:</label>
+      <br />
+      <input type="text" id="clientId" />
+      <br />
+      <br />
+      <button onclick="consultarCliente()">Consultar Cliente</button>
+    </section>
+    <br />
     <div id="resultado">
       <!-- Resultado da consulta será exibido aqui -->
     </div>
-<br>
+  
     <script>
-
       async function consultarCliente() {
         // Obtém o valor do campo e remove espaços em branco do início e do fim
         const clientId = document.getElementById("clientId").value.trim();
@@ -31,24 +38,35 @@
             } else {
               const data = await response.json(); // Converte a resposta para JSON
               document.getElementById("resultado").innerHTML = `
+              <div class="container2">
                 <h2>Detalhes do Cliente</h2>
                 <form>
-                  <label for="clientIdField">ID do Cliente:</label>
+                  <label for="clientIdField">ID do Cliente:</label><br>
                   <input type="text" id="clientIdField" value="${data.cliente_id}" disabled><br>
-
-                  <label for="name">Nome do cliente:</label>
+                  <br>
+                  
+                  
+                  <label for="name">Nome do cliente:</label><br>
                   <input type="text" id="name" value="${data.nome}" disabled><br>
+                  <br>
+        
 
-                  <label for="age">Idade: </label>
+                  <label for="age">Idade: </label><br>
                   <input type="text" id="age" value="${data.idade}" disabled><br>
+                  <br>
+      
 
-                  <label for="sexo">Sexo: </label>
+                  <label for="sexo">Sexo: </label><br>
                   <input type="text" id="sexo" value="${data.sexo}" disabled><br>
+                  <br>
+                
 
-                  <label for="cidade">Cidade: </label>
+                  <label for="cidade">Cidade: </label><br>
                   <input type="text" id="cidade" value="${data.cidade}" disabled><br>
 
-                </form>`;
+                </form>
+              <div/>
+                `;
             }
           } catch (error) {
             console.error("Erro ao consultar cliente:", error);
@@ -56,8 +74,7 @@
         }
       }
     </script>
-
-<button type="submit"><a href="/">Voltar</a></button>
-
+    <br />
+    <button type="submit" class="voltar"><a href="/">Voltar</a></button>
   </body>
 </html>
